@@ -1,0 +1,377 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>CMO Council Signatures</title>
+<style>
+@font-face{font-family:Montserrat;font-weight:500;src:url(fonts/m500.woff) format("woff")}
+@font-face{font-family:Montserrat;font-weight:600;src:url(fonts/m600.woff) format("woff")}
+@font-face{font-family:Montserrat;font-weight:700;src:url(fonts/m700.woff) format("woff")}
+@font-face{font-family:Montserrat;font-weight:800 900;src:url(fonts/m800.woff) format("woff")}
+/* Layout: a private screening room for the Council's signatures. Gate, then person tabs, the stage, the motion reel and the layout wall. */
+:root{
+  --bg:#efedec; --surface:#fbfafa; --ink:#151314; --muted:#6d6567; --line:#dcd7d7;
+  --red:#E1202D; --red-ink:#b3121c; --paper:#ffffff; --tint:#f8e3e4;
+  --shadow:0 1px 2px rgba(30,10,12,.06),0 12px 40px -12px rgba(30,10,12,.18);
+  --display:"Montserrat","Helvetica Neue",Arial,sans-serif; --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#141213; --surface:#1d1a1b; --ink:#f4efef; --muted:#a69d9f; --line:#332e2f;
+  --red:#ff3d49; --red-ink:#ff6d76; --tint:#3b1a1d; --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 50px -16px rgba(0,0,0,.7); color-scheme:dark}}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--display);font-size:15px;line-height:1.55;padding-inline:20px;padding-block:0 72px;-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}
+.wrap{max-width:1200px;margin:0 auto}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--red-ink);margin:0}
+
+/* gate */
+.gate{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding-block:40px}
+.gate form{width:min(420px,100%);background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
+.gate .plate{background:var(--paper);display:grid;place-items:center;padding:30px 20px 22px}
+.gate .plate img{width:176px;height:auto;display:block}
+.gate .body{padding:22px 24px 24px;display:grid;gap:12px}
+.gate h1{margin:0;font-weight:900;font-size:26px;letter-spacing:-.02em;line-height:1.1}
+.gate p{margin:0;color:var(--muted);font-size:14px}
+.gate label{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gate .row{display:flex;gap:8px}
+.gate input{flex:1;min-width:0;font:600 16px var(--display);padding:11px 13px;border-radius:9px;border:1px solid var(--line);background:var(--bg);color:var(--ink);letter-spacing:.1em}
+.gate input:focus{outline:2px solid var(--red);outline-offset:1px}
+.gate .err{color:var(--red-ink);font-size:13px;font-weight:600;min-height:1.2em}
+.shake{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-3px)}}
+
+/* studio */
+header{padding-block:44px 6px;display:grid;gap:14px}
+h1.big{font-weight:900;font-size:clamp(34px,6vw,72px);line-height:.92;letter-spacing:-.035em;margin:0;text-wrap:balance}
+h1.big em{font-style:normal;color:var(--red)}
+.lede{max-width:64ch;color:var(--muted);margin:0}
+.people{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.person{display:flex;align-items:center;gap:12px;padding:8px 16px 8px 8px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font:inherit;color:inherit;text-align:left}
+.person img{width:40px;height:40px;border-radius:50%;display:block}
+.person b{display:block;font-size:14px;font-weight:800;line-height:1.2}
+.person span{display:block;font-size:12px;color:var(--muted);line-height:1.3}
+.person[aria-pressed="true"]{border-color:var(--red);box-shadow:0 0 0 3px var(--tint)}
+.person:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.stage{margin-top:22px;background:var(--paper);border-radius:14px;box-shadow:var(--shadow);padding:clamp(18px,4vw,46px);display:grid;gap:18px}
+.stage .screen{display:flex;justify-content:center}
+.stage .screen img{width:100%;max-width:840px;height:auto;display:block}
+.stage .bar{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;align-items:baseline;border-top:1px solid #ece7e7;padding-top:14px;color:#6d6567;font-family:var(--mono);font-size:12px}
+.stage .bar b{color:#E1202D;font-weight:600}
+section{padding-block:48px 0}
+.sec-head{display:grid;grid-template-columns:auto 1fr;gap:6px 28px;align-items:end;margin-bottom:18px}
+h2{font-weight:800;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.02em;margin:0;line-height:1.1}
+h2 small{display:block;font-family:var(--mono);font-weight:400;font-size:12px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px}
+.hint{color:var(--muted);font-size:14px;margin:0;max-width:62ch;justify-self:end;text-align:right}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 16px}
+.panel .f{display:grid;gap:5px;min-width:0}
+.panel label{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.panel input{font:500 14px var(--display);padding:9px 11px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);min-width:0;width:100%}
+.panel input:focus{outline:2px solid var(--red);outline-offset:1px}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--bg)}
+.seg button{flex:1;border:0;border-radius:0;background:transparent;font:700 12.5px var(--display);padding:9px 8px;color:var(--muted);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--red);color:#fff}
+.reel{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.clip{position:relative;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:12px;cursor:pointer;transition:transform .18s,box-shadow .18s}
+.clip:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.clip input{position:absolute;opacity:0;pointer-events:none}
+.clip:has(input:checked){border-color:var(--red);box-shadow:0 0 0 3px var(--tint),var(--shadow)}
+.clip:has(input:focus-visible){outline:2px solid var(--red);outline-offset:3px}
+.clip .plate{background:var(--paper);border-radius:11px 11px 0 0;display:grid;place-items:center;padding:14px 8px;min-height:174px}
+.clip .plate img{width:176px;max-width:100%;height:auto;display:block}
+.clip .meta{padding:12px 14px 14px;display:grid;gap:4px;align-content:start}
+.clip .row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.clip h3{margin:0;font-size:15px;font-weight:800}
+.clip .n{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.clip p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.45}
+.wall{display:grid;gap:18px}
+.lay{background:var(--surface);border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;min-width:0}
+.lay .top{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:baseline}
+.lay .top em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--muted)}
+.lay h3{margin:0;font-size:15.5px;font-weight:800}
+.lay .use{margin:2px 0 0;font-size:13px;color:var(--muted)}
+.lay .canvas{background:var(--paper);padding:34px clamp(18px,4vw,48px);overflow-x:auto;display:flex;align-items:center;min-height:220px}
+.lay .canvas.center{justify-content:center}
+.lay .foot{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--line)}
+.lay .foot span{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.lay .foot div{display:flex;gap:6px}
+button.b{font:700 12.5px var(--display);border-radius:8px;padding:9px 13px;cursor:pointer;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+button.b.primary{background:var(--red);border-color:var(--red);color:#fff}
+button.b:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.notes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.note{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.note h3{margin:0 0 6px;font-size:14.5px;font-weight:800}
+.note ol,.note p{margin:0;padding-left:18px;color:var(--muted);font-size:13px}
+.note p{padding-left:0}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;font-size:13.5px;font-weight:600;opacity:0;transition:.2s;pointer-events:none;z-index:9}
+.toast.on{opacity:1;transform:translateX(-50%)}
+#scratch{position:fixed;left:-9999px;top:0}
+.lock{background:none;border:0;color:var(--muted);font:600 12px var(--display);cursor:pointer;text-decoration:underline;padding:0;justify-self:start}
+@media (max-width:1060px){.reel{grid-template-columns:repeat(3,minmax(0,1fr))}.panel{grid-template-columns:repeat(2,minmax(0,1fr))}.notes{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){.reel{grid-template-columns:repeat(2,minmax(0,1fr))}.sec-head{grid-template-columns:1fr}.hint{justify-self:start;text-align:left}.notes,.panel{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.clip{transition:none}.clip:hover{transform:none}.shake{animation:none}}
+</style>
+</head>
+<body>
+
+<div class="gate" id="gate">
+  <form id="gateForm" autocomplete="off">
+    <div class="plate"><img id="gateLogo" alt="CMO Council" width="176" height="120"></div>
+    <div class="body">
+      <p class="eyebrow">Private · CMO Council</p>
+      <h1>Signature Studio</h1>
+      <p>Animated email signatures for the CMO Council team. Enter the password to continue.</p>
+      <label for="pw">Password</label>
+      <div class="row"><input id="pw" type="password" autocomplete="off" autofocus><button class="b primary" type="submit">Enter</button></div>
+      <div class="err" id="err" role="alert"></div>
+    </div>
+  </form>
+</div>
+
+<div class="wrap" id="app" hidden>
+  <header>
+    <p class="eyebrow">CMO Council · Signature Studio</p>
+    <h1 class="big">Signatures,<br><em>in motion.</em></h1>
+    <p class="lede">Pick your name, pick an animation, pick a layout, then hit Copy signature and paste it into your mail settings. Every animation is rendered from the official CMO Council artwork and served from a permanent, version-locked address.</p>
+    <div class="people" id="people" role="group" aria-label="Whose signature"></div>
+  </header>
+
+  <div class="stage">
+    <div class="screen"><img id="hero" alt="Animated signature banner" width="560" height="146"></div>
+    <div class="bar"><span>Now playing · <b id="nowName"></b></span><span>Banner 560 px · Lockup 176 px · 2× retina · 30 fps · frame 1 is the finished logo</span></div>
+  </div>
+
+  <section>
+    <div class="sec-head"><h2><small>Step 1</small>Check your details</h2><p class="hint">These fill the text and links. Your name and title inside the banner animation are fixed.</p></div>
+    <div class="panel" id="panel">
+      <div class="f"><label for="f-phone">Mobile</label><input id="f-phone"></div>
+      <div class="f"><label for="f-email">Email</label><input id="f-email" type="email"></div>
+      <div class="f"><label for="f-city">Location</label><input id="f-city"></div>
+      <div class="f"><label>Logo</label><div class="seg" id="logoSeg"><button type="button" data-logo="plain">CMO Council</button><button type="button" data-logo="gc">Global Circle</button></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2><small>Step 2</small>Choose the motion</h2><p class="hint">Every loop opens on the finished logo, so Outlook for Windows, which only shows frame one, still looks right.</p></div>
+    <div class="reel" id="reel" role="radiogroup" aria-label="Animation"></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2><small>Step 3</small>Choose the layout and copy</h2><p class="hint">Copy signature puts formatted HTML on your clipboard. Copy HTML gives you the raw code for tools that want it.</p></div>
+    <div class="wall" id="wall"></div>
+  </section>
+
+  <section>
+    <div class="sec-head"><h2><small>Step 4</small>Install it</h2></div>
+    <div class="notes">
+      <div class="note"><h3>Gmail</h3><ol><li>Settings, See all settings, General, Signature.</li><li>Create new and paste.</li><li>Scroll down and Save Changes.</li></ol></div>
+      <div class="note"><h3>Outlook web and new Outlook</h3><ol><li>Settings, Account, Signatures.</li><li>New signature, paste, save.</li><li>Set it as the default for new mail and replies.</li></ol></div>
+      <div class="note"><h3>Apple Mail</h3><ol><li>Mail, Settings, Signatures, plus.</li><li>Untick “Always match my default message font”.</li><li>Paste. GIFs animate in Mail and iOS Mail.</li></ol></div>
+      <div class="note"><h3>Good to know</h3><p>Use the Compact Reply layout for long threads. Outlook for Windows shows a still, finished logo. Everywhere else animates.</p></div>
+    </div>
+  </section>
+  <section><button class="lock" id="lockBtn" type="button">Lock this page</button></section>
+</div>
+<div id="scratch" contenteditable="true" aria-hidden="true"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+// Artwork is served from jsDelivr pinned to an exact commit, so the URLs in copied signatures never change.
+const PINNED = 'https://cdn.jsdelivr.net/gh/CultureCartel/cmo-signatures@e37cc1a77d6026b9726aaf645e5c1ecc1959a539/assets/';
+const ASSETS = PINNED.startsWith('__') ? new URL('assets/', location.href).href : PINNED;
+const PASS = 'cmo';
+const KEY = 'cmo-sig-unlocked';
+
+const ANIMS = [
+  ['01-convergence','Convergence','320 red points sweep in from every direction and lock into the disc.'],
+  ['02-globe','Globe to Mark','A dotted globe spins, flushes red and becomes the CMO Council disc.'],
+  ['03-liquid','Liquid Fill','Red rises inside the circle like liquid and surfaces the letters.'],
+  ['04-ink','Ink & Slide','A pen traces the circle, ink floods it, and c, M, O slide in.'],
+  ['05-twentyfive','25 Years','The disc counts from 01 to 25, then hands off to the letters.'],
+  ['06-orbits','Orbit System','Three satellites orbit the mark, passing behind and in front.'],
+  ['07-iris','Aperture','A camera iris opens on the mark and the wordmark slides up.'],
+  ['08-kinetic','Kinetic Roll','Big type slams down and the disc rolls in like a wheel.'],
+  ['09-network','Signal Network','A radar sweep lights a web of nodes around the disc.'],
+  ['10-coin','Gold Standard','The disc spins in like a minted coin, then a gloss pass.'],
+];
+const PEOPLE = {
+  jarryd: { key:'jarryd', name:'Jarryd McDonald', title:'Director, Global Circle', org:'CMO Council', sub:'North America Advisory Board',
+    phone:'+1 647.459.2154', email:'jarryd@cmocouncil.org', city:'Toronto, Canada', logo:'gc', bannerLogo:'gc',
+    line:'Turning North America’s top marketers into an active network.', cta:'Join the Global Circle', anim:'03-liquid' },
+  donovan: { key:'donovan', name:'Donovan Neale-May', title:'Executive Director', org:'CMO Council', sub:'San Jose, USA',
+    phone:'+1 650.222.5260', email:'donovan@cmocouncil.org', city:'San Jose, USA', logo:'plain', bannerLogo:'plain',
+    line:'25 years of connecting the world’s marketing leaders.', cta:'Explore the CMO Council', anim:'05-twentyfive' },
+  bryan: { key:'bryan', name:'Bryan DeRose', title:'SVP, Business & Program Development', org:'CMO Council', sub:'',
+    phone:'+1 408.921.1577', email:'bderose@cmocouncil.org', city:'', logo:'plain', bannerLogo:'plain',
+    line:'Building the programs that move marketing leaders forward.', cta:'Explore the CMO Council', anim:'07-iris' },
+};
+const WEB = 'cmocouncil.org', URL_ = 'https://www.cmocouncil.org', RED = '#E1202D', F = 'font-family:Arial,Helvetica,sans-serif;';
+
+let state = { who:'jarryd', anim:null, logo:null, edits:{} };
+try { Object.assign(state, JSON.parse(localStorage.getItem('cmo-sig-state') || '{}')); } catch (e) {}
+const save = () => { try { localStorage.setItem('cmo-sig-state', JSON.stringify(state)); } catch (e) {} };
+
+// ---------- gate ----------
+const gate = document.getElementById('gate'), app = document.getElementById('app');
+document.getElementById('gateLogo').src = ASSETS + '06-orbits-lockup-plain.gif';
+function unlocked() { try { return localStorage.getItem(KEY) === '1' || sessionStorage.getItem(KEY) === '1'; } catch (e) { return false; } }
+function open() { gate.hidden = true; app.hidden = false; render(); }
+document.getElementById('gateForm').addEventListener('submit', e => {
+  e.preventDefault(); const v = document.getElementById('pw').value.trim().toLowerCase();
+  if (v === PASS) { try { localStorage.setItem(KEY, '1'); } catch (_) {} open(); }
+  else { const f = e.target; f.classList.remove('shake'); void f.offsetWidth; f.classList.add('shake'); document.getElementById('err').textContent = 'That password is not right. Try again.'; }
+});
+document.getElementById('lockBtn').addEventListener('click', () => { try { localStorage.removeItem(KEY); sessionStorage.removeItem(KEY); } catch (_) {} location.reload(); });
+
+// ---------- person + details ----------
+function person() {
+  const base = PEOPLE[state.who], ed = state.edits[state.who] || {};
+  const P = { ...base, ...ed };
+  P.tel = (P.phone || '').replace(/[^\d+]/g, '');
+  P.logo = state.logo && state.logo[state.who] || base.logo;
+  return P;
+}
+const fields = ['phone', 'email', 'city'];
+fields.forEach(k => document.getElementById('f-' + k).addEventListener('input', e => {
+  (state.edits[state.who] ||= {})[k] = e.target.value; save(); renderWall();
+}));
+document.getElementById('logoSeg').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  (state.logo ||= {})[state.who] = b.dataset.logo; save(); render();
+});
+
+// ---------- email HTML building blocks ----------
+const a = (href, text, style) => `<a href="${href}" style="color:${RED};text-decoration:none;${style || ''}">${text}</a>`;
+const img = (src, w, h, alt, extra) => `<img src="${src}" width="${w}" height="${h}" alt="${alt}" style="display:block;border:0;outline:none;width:${w}px;height:${h}px;${extra || ''}">`;
+const ln = (lh, size, color, body, extra) => `<div style="${F}font-size:${size}px;line-height:${lh}px;color:${color};white-space:nowrap;${extra || ''}">${body}</div>`;
+const block = (h, inner) => `<table cellpadding="0" cellspacing="0" border="0"><tr><td height="${h}" style="height:${h}px;vertical-align:middle;">${inner}</td></tr></table>`;
+const tbl = (inner, style) => `<table cellpadding="0" cellspacing="0" border="0" style="${F}border-collapse:collapse;${style || ''}">${inner}</table>`;
+const td = (body, style) => `<td style="vertical-align:middle;${style || ''}">${body}</td>`;
+const caps = (t, color = RED, size = 11) => ln(20, size, color, `<b>${t}</b>`, 'letter-spacing:1.4px;text-transform:uppercase;');
+const vr = (h, color = RED, w = 2) => `<td style="vertical-align:middle;"><table cellpadding="0" cellspacing="0" border="0"><tr><td width="${w}" height="${h}" style="width:${w}px;height:${h}px;background:${color};font-size:0;line-height:0;">&nbsp;</td></tr></table></td>`;
+const lab = (l) => `<b style="color:${RED};">${l}</b>&nbsp;&nbsp;`;
+const gap = (h) => `<div style="height:${h}px;line-height:${h}px;font-size:0;">&nbsp;</div>`;
+
+function kit(P) {
+  const gc = P.logo === 'gc', LH = gc ? 146 : 120, ART = gc ? 130 : 104; // art = disc top to last baseline
+  const u = {
+    lockup: `${ASSETS}${state.anim}-lockup${gc ? '' : '-plain'}.gif`,
+    banner: `${ASSETS}${state.anim}-banner-${P.key}.gif`, bannerH: P.bannerLogo === 'gc' ? 146 : 120,
+    head: `${ASSETS}${P.key}-headshot.png`, headDark: `${ASSETS}${P.key}-headshot-dark.png`,
+  };
+  const L = (w = 176) => `<a href="${URL_}" style="text-decoration:none;">${img(u.lockup, w, Math.round(w * LH / 176), 'CMO Council')}</a>`;
+  const orgLine = P.sub ? `${P.org} · ${P.sub}` : P.org;
+  const mail = (c) => a('mailto:' + P.email, P.email, 'color:' + c + ';');
+  const web = (c) => a(URL_, WEB, 'color:' + c + ';');
+  // standard text block, sized to the logo art so top and bottom line up
+  const STD = (c = '#111111', sub = '#555555') => gc
+    ? ln(28, 22, c, `<b>${P.name}</b>`, 'letter-spacing:-0.3px;') + caps(P.title) + ln(20, 13, sub, orgLine) + gap(8) +
+      (P.phone ? ln(18, 12.5, sub, lab('M') + P.phone) : ln(18, 12.5, sub, lab('W') + web(sub))) +
+      ln(18, 12.5, sub, lab('E') + mail(sub)) + (P.phone ? ln(18, 12.5, sub, lab('W') + web(sub)) : gap(18))
+    : ln(26, 21, c, `<b>${P.name}</b>`, 'letter-spacing:-0.3px;') + caps(P.title) + ln(18, 13, sub, orgLine) + gap(4) +
+      ln(18, 12.5, sub, (P.phone ? lab('M') + P.phone + '&nbsp;&nbsp;&nbsp;' : '') + lab('W') + web(sub)) + ln(18, 12.5, sub, lab('E') + mail(sub));
+  const contactsRow = (c = '#444444') => `<table cellpadding="0" cellspacing="0" border="0" style="${F}"><tr>
+${P.phone ? `<td style="font-size:12.5px;line-height:20px;color:${c};padding-right:20px;white-space:nowrap;">${lab('M')}${P.phone}</td>` : ''}
+<td style="font-size:12.5px;line-height:20px;padding-right:20px;white-space:nowrap;">${lab('E')}${mail(c)}</td>
+<td style="font-size:12.5px;line-height:20px;white-space:nowrap;">${lab('W')}${web(c)}</td></tr></table>`;
+  return { u, L, ART, STD, contactsRow, orgLine, mail, web, gc };
+}
+
+const LAYOUTS = [
+  ['The Banner', 'Your name builds in alongside the mark. The full motion piece, with live links underneath.', (P, k) => tbl(`
+<tr><td><a href="${URL_}" style="text-decoration:none;">${img(k.u.banner, 560, k.u.bannerH, `${P.name}, ${P.title}, CMO Council`, 'max-width:100%;height:auto;')}</a></td></tr>
+<tr><td style="padding:10px 0 0 8px;">${k.contactsRow()}</td></tr>`)],
+  ['Portrait Executive', 'Headshot, details, then the animated logo closing the line. Personal and official in one.', (P, k) => tbl(`<tr>
+${td(img(k.u.head, 96, 96, P.name, 'border-radius:48px;'), 'padding-right:20px;')}
+${td(block(k.ART, k.STD()), 'padding-right:22px;')}${vr(k.ART, '#dddddd', 1)}${td(k.L(), 'padding-left:14px;')}</tr>`)],
+  ['Classic Lockup', 'The Council’s own structure, rebuilt with a red rule and labelled contacts. Safe in every client.', (P, k) => tbl(`<tr>
+${td(k.L(), 'padding-right:14px;')}${vr(k.ART)}${td(block(k.ART, k.STD()), 'padding-left:20px;')}</tr>`)],
+  ['Red Block', 'A solid CMO red panel carries your name. Impossible to miss at the bottom of a thread.', (P, k) => tbl(`<tr>
+<td bgcolor="${RED}" style="background:${RED};vertical-align:middle;padding:8px 26px 8px 24px;border-radius:8px 0 0 8px;">${block(k.ART,
+  ln(28, 22, '#ffffff', `<b>${P.name}</b>`, 'letter-spacing:-0.3px;') + caps(P.title, '#ffd9dc') + ln(20, 13, '#ffe9ea', k.orgLine) + gap(k.gc ? 16 : 4) +
+  (P.phone ? ln(20, 13, '#ffffff', P.phone) : '') + ln(20, 13, '#ffffff', `${a('mailto:' + P.email, P.email, 'color:#ffffff;')} &nbsp;·&nbsp; ${a(URL_, WEB, 'color:#ffffff;')}`))}</td>
+<td style="vertical-align:middle;border:1px solid #eeeeee;border-left:0;border-radius:0 8px 8px 0;padding:0 6px;">${k.L()}</td></tr>`)],
+  ['Portrait Card', 'A framed card that leads with your face, with the logo signing off on the right.', (P, k) => tbl(`<tr><td style="border:1px solid #e6e6e6;border-top:4px solid ${RED};border-radius:8px;padding:16px 18px;">
+<table cellpadding="0" cellspacing="0" border="0" style="${F}"><tr>
+${td(img(k.u.head, 80, 80, P.name, 'border-radius:40px;'), 'padding-right:16px;')}
+${td(ln(26, 20, '#111111', `<b>${P.name}</b>`) + caps(P.title) + ln(20, 13, '#555555', k.orgLine), 'padding-right:18px;')}
+${td(k.L(140), 'border-left:1px solid #eeeeee;padding-left:12px;')}</tr>
+<tr><td colspan="3" style="padding-top:14px;border-top:1px solid #eeeeee;">${k.contactsRow()}</td></tr></table></td></tr>`)],
+  ['Mobile Stack', 'Centred, with tap-sized buttons for call, email and web. Built for phones.', (P, k) => `
+<table cellpadding="0" cellspacing="0" border="0" align="center" style="${F}border-collapse:collapse;"><tr><td align="center" style="text-align:center;">
+<table cellpadding="0" cellspacing="0" border="0" align="center"><tr><td>${k.L()}</td></tr></table>
+${ln(28, 21, '#111111', `<b>${P.name}</b>`, 'padding-top:8px;')}${caps(P.title)}${ln(20, 13, '#555555', P.city ? `${P.org} · ${P.city}` : P.org)}
+<table cellpadding="0" cellspacing="0" border="0" align="center" style="margin-top:12px;"><tr>
+${[P.phone && ['Call', 'tel:' + P.tel], ['Email', 'mailto:' + P.email], ['Website', URL_]].filter(Boolean).map(([t, h]) => `<td style="padding:0 4px;"><table cellpadding="0" cellspacing="0" border="0"><tr><td style="border:1.5px solid ${RED};border-radius:16px;"><a href="${h}" style="display:inline-block;padding:5px 16px;${F}font-size:12px;line-height:16px;font-weight:bold;color:${RED};text-decoration:none;">${t}</a></td></tr></table></td>`).join('')}
+</tr></table></td></tr></table>`],
+  ['Dark Executive', 'Black band, monochrome portrait, the logo in a white tile. Editorial and confident.', (P, k) => tbl(`<tr>
+<td bgcolor="#111111" style="background:#111111;border-radius:10px;padding:14px;"><table cellpadding="0" cellspacing="0" border="0" style="${F}"><tr>
+${td(img(k.u.headDark, 96, 96, P.name, 'border-radius:48px;filter:grayscale(1);'), 'padding:0 20px 0 6px;')}
+${td(block(k.ART, k.STD('#ffffff', '#c9c9c9')), 'padding-right:22px;')}
+${td(`<table cellpadding="0" cellspacing="0" border="0" style="background:#ffffff;border-radius:8px;"><tr><td>${k.L()}</td></tr></table>`)}
+</tr></table></td></tr>`)],
+  ['Thought Leader', 'Adds a one-line point of view and a red call to action.', (P, k) => tbl(`<tr>
+${td(k.L(), 'padding-right:14px;')}${vr(k.ART)}${td(block(k.ART,
+  ln(k.gc ? 28 : 24, k.gc ? 22 : 20, '#111111', `<b>${P.name}</b>`, 'letter-spacing:-0.3px;') + caps(P.title) +
+  ln(k.gc ? 20 : 18, 13, '#555555', `<i>${P.line}</i>`, k.gc ? 'padding-top:4px;' : '') +
+  ln(k.gc ? 20 : 18, 13, '#555555', `${P.phone ? P.phone + ' · ' : ''}${a('mailto:' + P.email, P.email, 'color:#555555;')}`, 'padding-bottom:' + (k.gc ? 8 : 4) + 'px;') +
+  `<table cellpadding="0" cellspacing="0" border="0"><tr><td style="background:${RED};border-radius:4px;"><a href="${URL_}" style="display:inline-block;padding:4px 14px;${F}font-size:12px;line-height:16px;font-weight:bold;color:#ffffff;text-decoration:none;letter-spacing:0.4px;">${P.cta} &rarr;</a></td></tr></table>`), 'padding-left:20px;')}</tr>`)],
+  ['Anniversary', 'Your details over a 25th anniversary strap with a numeral badge.', (P, k) => tbl(`<tr>
+${td(k.L(), 'padding-right:14px;')}${vr(k.ART, '#111111', 1)}${td(block(k.ART, k.STD()), 'padding-left:20px;')}</tr>
+<tr><td colspan="3" style="padding-top:14px;"><table cellpadding="0" cellspacing="0" border="0" width="100%" style="${F}"><tr>
+<td width="30" style="width:30px;padding-right:10px;"><table cellpadding="0" cellspacing="0" border="0"><tr><td width="30" height="30" align="center" style="width:30px;height:30px;background:${RED};border-radius:15px;${F}font-size:12px;line-height:30px;font-weight:bold;color:#ffffff;text-align:center;">25</td></tr></table></td>
+<td style="border-top:2px solid ${RED};padding-top:8px;font-size:11px;line-height:14px;font-weight:bold;color:#111111;letter-spacing:1.4px;text-transform:uppercase;white-space:nowrap;">Celebrating 25 years of the CMO Council</td>
+<td align="right" style="border-top:2px solid ${RED};padding-top:8px;font-size:11px;line-height:14px;padding-left:16px;">${a(URL_, WEB, 'font-weight:bold;letter-spacing:0.6px;')}</td>
+</tr></table></td></tr>`)],
+  ['Compact Reply', 'A smaller logo and two tight lines for replies and long threads.', (P, k) => tbl(`<tr>
+${td(k.L(110), 'padding-right:10px;')}${vr(Math.round(k.ART * 110 / 176), '#cccccc', 1)}${td(block(Math.round(k.ART * 110 / 176),
+  ln(22, 15, '#111111', `<b>${P.name}</b>`) + ln(18, 10.5, RED, `<b>${P.title}</b>`, 'letter-spacing:1.3px;text-transform:uppercase;') +
+  ln(20, 12.5, '#555555', `${P.phone ? P.phone + ' · ' : ''}${a('mailto:' + P.email, P.email, 'color:#555555;')}`)), 'padding-left:14px;')}</tr>`)],
+];
+
+// ---------- render ----------
+const $ = id => document.getElementById(id);
+function render() {
+  const P = person();
+  if (!state.anim || !ANIMS.some(x => x[0] === state.anim)) state.anim = PEOPLE[state.who].anim;
+  $('people').innerHTML = Object.values(PEOPLE).map(p => `<button class="person" type="button" data-who="${p.key}" aria-pressed="${p.key === state.who}">
+    <img src="${ASSETS}${p.key}-headshot.png" alt="" width="40" height="40"><span><b>${p.name}</b><span>${p.title}</span></span></button>`).join('');
+  fields.forEach(k => { const el = $('f-' + k); if (document.activeElement !== el) el.value = P[k] || ''; });
+  [...$('logoSeg').children].forEach(b => b.setAttribute('aria-pressed', b.dataset.logo === P.logo));
+  $('reel').innerHTML = ANIMS.map(([f, name, desc], i) => `<label class="clip"><input type="radio" name="anim" value="${f}" ${f === state.anim ? 'checked' : ''}>
+    <div class="plate"><img src="${ASSETS}${f}-lockup${P.logo === 'gc' ? '' : '-plain'}.gif" width="176" alt="${name} preview" loading="lazy"></div>
+    <div class="meta"><div class="row"><h3>${name}</h3><span class="n">${String(i + 1).padStart(2, '0')}</span></div><p>${desc}</p></div></label>`).join('');
+  renderWall();
+}
+function renderWall() {
+  const P = person(), k = kit(P), A = ANIMS.find(x => x[0] === state.anim);
+  $('hero').src = k.u.banner; $('hero').height = k.u.bannerH; $('nowName').textContent = `${A[1]} · ${P.name}`;
+  $('wall').innerHTML = LAYOUTS.map(([name, use, fn], i) => `<article class="lay">
+    <div class="top"><em>${String(i + 1).padStart(2, '0')}</em><div><h3>${name}</h3><p class="use">${use}</p></div></div>
+    <div class="canvas${i === 5 ? ' center' : ''}"><div>${fn(P, k)}</div></div>
+    <div class="foot"><span>${P.name} · ${A[1]}</span><div><button class="b" data-code="${i}">Copy HTML</button><button class="b primary" data-copy="${i}">Copy signature</button></div></div></article>`).join('');
+}
+$('people').addEventListener('click', e => { const b = e.target.closest('.person'); if (!b) return; state.who = b.dataset.who; state.anim = PEOPLE[state.who].anim; save(); render(); });
+$('reel').addEventListener('change', e => { state.anim = e.target.value; save(); renderWall(); toast(ANIMS.find(x => x[0] === state.anim)[1] + ' is now in every layout'); });
+
+// ---------- copy ----------
+const tEl = $('toast'); let tt;
+function toast(m) { tEl.textContent = m; tEl.classList.add('on'); clearTimeout(tt); tt = setTimeout(() => tEl.classList.remove('on'), 2400); }
+$('wall').addEventListener('click', async e => {
+  const b = e.target.closest('button'); if (!b) return;
+  const P = person(), i = +(b.dataset.copy ?? b.dataset.code), html = LAYOUTS[i][2](P, kit(P)).trim();
+  if (b.dataset.code !== undefined) { try { await navigator.clipboard.writeText(html); toast('HTML code copied'); } catch (_) { fallback(html, false); } return; }
+  try { await navigator.clipboard.write([new ClipboardItem({ 'text/html': new Blob([html], { type: 'text/html' }), 'text/plain': new Blob([`${P.name}\n${P.title}, ${P.org}\n${P.phone ? P.phone + ' | ' : ''}${P.email}`], { type: 'text/plain' }) })]); toast('Signature copied. Paste it into your mail settings.'); }
+  catch (_) { fallback(html, true); }
+});
+function fallback(h, rich) {
+  const s = $('scratch'); if (rich) s.innerHTML = h; else s.textContent = h;
+  const r = document.createRange(); r.selectNodeContents(s); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r);
+  let ok = false; try { ok = document.execCommand('copy'); } catch (_) {} sel.removeAllRanges();
+  toast(ok ? (rich ? 'Signature copied. Paste it into your mail settings.' : 'HTML code copied') : 'Your browser blocked copying. Select the signature and press Ctrl+C or Cmd+C.');
+}
+
+if (unlocked()) open();
+</script>
+</body></html>
