@@ -96,6 +96,24 @@ section{padding-block:34px 0}
 .seg button{flex:1;border:0;border-radius:0;background:#fff;font:700 12px var(--font);text-transform:uppercase;letter-spacing:.04em;padding:8px 6px;color:var(--red);cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--red);color:#fff}
 
+/* people extras */
+.pfind{display:grid;gap:5px;margin-bottom:12px;max-width:360px}
+.pfind label,.addform label{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.pfind input,.addform input{font:600 14px var(--font);padding:9px 11px;border:1px solid #c9c9c9;border-radius:0;background:#fff;color:var(--ink);width:100%;min-width:0}
+.pfind input:focus,.addform input:focus{outline:2px solid var(--red);outline-offset:0}
+.person.pending{cursor:default;background:var(--wash);border-style:dashed}
+.spin{width:64px;height:64px;border-radius:50%;flex:none;border:4px solid #e7e7e7;border-top-color:var(--red);animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.addform{display:grid;grid-template-columns:260px minmax(0,1fr);gap:22px;border:1px solid var(--rule);border-top:4px solid var(--red);padding:20px}
+.addform .photo{display:grid;gap:10px;justify-items:center;align-content:start;text-align:center}
+.addform canvas{width:180px;height:180px;border-radius:50%;background:var(--wash);display:block}
+.addform .photo small{color:var(--muted);font-size:12px;line-height:1.4}
+.addform .fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 16px;align-content:start}
+.addform .f{display:grid;gap:5px;min-width:0}
+.addform .submit{align-self:end}
+.addform .msg{grid-column:1/-1;font-weight:700;font-size:14px;min-height:1.4em}
+.addform .msg.ok{color:#1d7a36}.addform .msg.bad{color:var(--red)}
+
 /* reel */
 .reel{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
 .clip{position:relative;display:flex;flex-direction:column;border:1px solid var(--rule);background:#fff;cursor:pointer}
@@ -151,8 +169,9 @@ footer .legal .in{display:flex;justify-content:space-between;gap:12px;flex-wrap:
 .toast.on{opacity:1;transform:translateX(-50%)}
 #scratch{position:fixed;left:-9999px;top:0}
 @media (max-width:1000px){.reel{grid-template-columns:repeat(3,minmax(0,1fr))}.panel,.notes{grid-template-columns:repeat(2,minmax(0,1fr))}.feature .in{grid-template-columns:1fr}.people{grid-template-columns:1fr}}
+@media (max-width:760px){.addform,.addform .fields{grid-template-columns:1fr}}
 @media (max-width:640px){.reel{grid-template-columns:repeat(2,minmax(0,1fr))}.panel,.notes{grid-template-columns:1fr}.stats{font-size:13px}.util .in span:last-child{display:none}footer .in{grid-template-columns:1fr}footer .links{justify-items:start}.sbar small{display:none}}
-@media (prefers-reduced-motion:reduce){.shake{animation:none}.toast{transition:none}}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}.shake{animation:none}.toast{transition:none}}
 </style>
 </head>
 <body>
@@ -177,7 +196,7 @@ footer .legal .in{display:flex;justify-content:space-between;gap:12px;flex-wrap:
     <a href="https://www.cmocouncil.org" aria-label="CMO Council"><img src="assets/cmo-council-logo.png" alt="CMO Council" width="150" height="97"></a>
     <div class="stats">25 years of marketing leadership<br>10 animations · 10 layouts<br>One click to copy</div>
   </div></div>
-  <nav class="nav" aria-label="Steps"><div class="in"><a href="#who">Choose your name</a><a href="#motion">Animation</a><a href="#layouts">Layout</a><a href="#install">Install</a></div></nav>
+  <nav class="nav" aria-label="Steps"><div class="in"><a href="#who">Choose your name</a><a href="#motion">Animation</a><a href="#layouts">Layout</a><a href="#install">Install</a><a href="#add">Add your details</a></div></nav>
 
   <div class="feature"><div class="in">
     <div>
@@ -192,7 +211,9 @@ footer .legal .in{display:flex;justify-content:space-between;gap:12px;flex-wrap:
   <div class="in">
     <section id="who">
       <div class="sbar"><h2>Step 1 · Choose your name</h2><small>Check your details</small></div>
+      <div class="pfind" hidden><label for="pfind">Find your name</label><input id="pfind" type="search" placeholder="Start typing a name"></div>
       <div class="people" id="people" role="group" aria-label="Whose signature"></div>
+      <p class="lead" style="margin-top:12px">Not on the list? <a href="#add">Add your details</a> and your personal signature is built for you.</p>
       <div class="panel" id="panel">
         <div class="f"><label for="f-phone">Mobile</label><input id="f-phone"></div>
         <div class="f"><label for="f-email">Email</label><input id="f-email" type="email"></div>
@@ -211,6 +232,25 @@ footer .legal .in{display:flex;justify-content:space-between;gap:12px;flex-wrap:
       <div class="sbar"><h2>Step 3 · Choose the layout and copy</h2><small>10 layouts</small></div>
       <p class="lead">Copy signature puts the formatted signature on your clipboard. Copy HTML gives you the raw code for tools that ask for it.</p>
       <div class="wall" id="wall"></div>
+    </section>
+
+    <section id="add">
+      <div class="sbar"><h2>Add your details</h2><small>For council members and team</small></div>
+      <p class="lead">Fill this in once. We build your personal animated banner with your name and title, plus your headshot, and add you to the list above. It usually takes 10 to 15 minutes.</p>
+      <form class="addform" id="addForm" novalidate>
+        <div class="photo"><canvas id="pcv" width="240" height="240" aria-label="Photo preview"></canvas>
+          <label class="btn ghost" for="a-photo">Choose photo</label><input id="a-photo" type="file" accept="image/jpeg,image/png,image/webp,image/heic" hidden>
+          <small>Square, head and shoulders works best. Optional: we make an initials badge if you skip it.</small></div>
+        <div class="fields">
+          <div class="f"><label for="a-name">Full name *</label><input id="a-name" maxlength="34" required autocomplete="name"></div>
+          <div class="f"><label for="a-title">Position *</label><input id="a-title" maxlength="48" required autocomplete="organization-title" placeholder="e.g. VP, Marketing"></div>
+          <div class="f"><label for="a-email">Email *</label><input id="a-email" type="email" maxlength="120" required autocomplete="email"></div>
+          <div class="f"><label for="a-phone">Mobile</label><input id="a-phone" maxlength="40" autocomplete="tel" placeholder="+1 416.555.0100"></div>
+          <div class="f"><label for="a-city">Location</label><input id="a-city" maxlength="40" placeholder="e.g. Toronto, Canada"></div>
+          <div class="f submit"><button class="btn" type="submit" id="a-go">Build my signature</button></div>
+          <div class="msg" id="a-msg" role="status"></div>
+        </div>
+      </form>
     </section>
 
     <section id="install">
@@ -277,7 +317,10 @@ const save = () => { try { localStorage.setItem('cmo-sig-state', JSON.stringify(
 const gate = document.getElementById('gate'), app = document.getElementById('app');
 document.getElementById('gateLogo').src = PREVIEW + '06-orbits-lockup-plain.gif';
 function unlocked() { try { return localStorage.getItem(KEY) === '1' || sessionStorage.getItem(KEY) === '1'; } catch (e) { return false; } }
-function open() { gate.hidden = true; app.hidden = false; render(); }
+async function open() {
+  gate.hidden = true; app.hidden = false; render(); await loadPeople(); render();
+  setInterval(async () => { if (PENDING.length) { await loadPeople(); render(); } }, 60000); // flip 'building' cards to ready
+}
 document.getElementById('gateForm').addEventListener('submit', e => {
   e.preventDefault(); const v = document.getElementById('pw').value.trim().toLowerCase();
   if (v === PASS) { try { localStorage.setItem(KEY, '1'); } catch (_) {} open(); }
@@ -285,9 +328,30 @@ document.getElementById('gateForm').addEventListener('submit', e => {
 });
 document.getElementById('lockBtn').addEventListener('click', () => { try { localStorage.removeItem(KEY); sessionStorage.removeItem(KEY); } catch (_) {} location.reload(); });
 
-// ---------- person + details ----------
+// ---------- people: the core three plus everyone published from the sign-up form ----------
+const SB_URL = 'https://dvgxzbqlxuskepknlkhn.supabase.co', SB_KEY = 'sb_publishable_kRTF5Q3XWLw9kwVARbbdIQ_tVAuPYlB';
+const CDN = 'https://cdn.jsdelivr.net/gh/CultureCartel/cmo-signatures@';
+let MEMBERS = {}, PENDING = [];
+const ALL = () => ({ ...PEOPLE, ...MEMBERS });
+function asMember(m) {
+  // everything here came from a public form: escape it before it goes anywhere near HTML
+  for (const k of ['name', 'title', 'org', 'sub', 'phone', 'email', 'city']) m[k] = esc(m[k] || '');
+  return { ...m, logo: 'plain', bannerLogo: 'plain', member: true, anim: '03-liquid',
+    line: 'Proud to be part of the CMO Council.', cta: 'Explore the CMO Council' };
+}
+async function loadPeople() {
+  try {
+    const r = await fetch('roster.json?v=' + Date.now()); if (r.ok) { const j = await r.json(); MEMBERS = Object.fromEntries((j.members || []).map(m => [m.key, asMember(m)])); }
+  } catch (e) {}
+  try {
+    const r = await fetch(`${SB_URL}/rest/v1/cmo_signature_members?select=id,name,title,email,created_at&order=created_at.desc`, { headers: { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}` } });
+    if (r.ok) { const ids = new Set(Object.values(MEMBERS).map(m => m.id)), seen = new Set();
+      PENDING = (await r.json()).filter(x => !/@example\.(com|org)$/i.test(x.email) && !ids.has(x.id) && !seen.has(x.email.toLowerCase()) && seen.add(x.email.toLowerCase())); }
+  } catch (e) {}
+}
 function person() {
-  const base = PEOPLE[state.who], ed = state.edits[state.who] || {};
+  if (!ALL()[state.who]) state.who = 'donovan';
+  const base = ALL()[state.who], ed = state.edits[state.who] || {};
   const P = { ...base, ...ed };
   P.tel = (P.phone || '').replace(/[^\d+]/g, '');
   P.logo = state.logo && state.logo[state.who] || base.logo;
@@ -303,23 +367,26 @@ document.getElementById('logoSeg').addEventListener('click', e => {
 });
 
 // ---------- email HTML building blocks ----------
+// signatures render at 85% of the original design; GIFs are 2x, so they stay sharp
+const Z = 0.85, z = v => Math.round(v * Z * 2) / 2;
 const a = (href, text, style) => `<a href="${href}" style="color:${RED};text-decoration:none;${style || ''}">${text}</a>`;
-const img = (src, w, h, alt, extra) => `<img src="${src}" width="${w}" height="${h}" alt="${alt}" style="display:block;border:0;outline:none;width:${w}px;height:${h}px;${extra || ''}">`;
-const ln = (lh, size, color, body, extra) => `<div style="${F}font-size:${size}px;line-height:${lh}px;color:${color};white-space:nowrap;${extra || ''}">${body}</div>`;
-const block = (h, inner) => `<table cellpadding="0" cellspacing="0" border="0"><tr><td height="${h}" style="height:${h}px;vertical-align:middle;">${inner}</td></tr></table>`;
+const img = (src, w, h, alt, extra) => { w = Math.round(w * Z); h = Math.round(h * Z); return `<img src="${src}" width="${w}" height="${h}" alt="${alt}" style="display:block;border:0;outline:none;width:${w}px;height:${h}px;${extra || ''}">`; };
+const ln = (lh, size, color, body, extra) => `<div style="${F}font-size:${z(size)}px;line-height:${z(lh)}px;color:${color};white-space:nowrap;${extra || ''}">${body}</div>`;
+const block = (h, inner) => (h = z(h), `<table cellpadding="0" cellspacing="0" border="0"><tr><td height="${h}" style="height:${h}px;vertical-align:middle;">${inner}</td></tr></table>`);
 const tbl = (inner, style) => `<table cellpadding="0" cellspacing="0" border="0" style="${F}border-collapse:collapse;${style || ''}">${inner}</table>`;
 const td = (body, style) => `<td style="vertical-align:middle;${style || ''}">${body}</td>`;
 const caps = (t, color = RED, size = 11) => ln(20, size, color, `<b>${t}</b>`, 'letter-spacing:1.4px;text-transform:uppercase;');
-const vr = (h, color = RED, w = 2) => `<td style="vertical-align:middle;"><table cellpadding="0" cellspacing="0" border="0"><tr><td width="${w}" height="${h}" style="width:${w}px;height:${h}px;background:${color};font-size:0;line-height:0;">&nbsp;</td></tr></table></td>`;
+const vr = (h, color = RED, w = 2) => (h = z(h), `<td style="vertical-align:middle;"><table cellpadding="0" cellspacing="0" border="0"><tr><td width="${w}" height="${h}" style="width:${w}px;height:${h}px;background:${color};font-size:0;line-height:0;">&nbsp;</td></tr></table></td>`);
 const lab = (l) => `<b style="color:${RED};">${l}</b>&nbsp;&nbsp;`;
-const gap = (h) => `<div style="height:${h}px;line-height:${h}px;font-size:0;">&nbsp;</div>`;
+const gap = (h) => (h = z(h), `<div style="height:${h}px;line-height:${h}px;font-size:0;">&nbsp;</div>`);
 
 function kit(P, base = ASSETS) {
+  const mbase = P.member ? (base === PREVIEW ? P.dir : `${CDN}${P.sha}/${P.dir}`) : '';
   const gc = P.logo === 'gc', LH = gc ? 146 : 120, ART = gc ? 130 : 104; // art = disc top to last baseline
   const u = {
     lockup: `${base}${state.anim}-lockup${gc ? '' : '-plain'}.gif`,
-    banner: `${base}${state.anim}-banner-${P.key}.gif`, bannerH: P.bannerLogo === 'gc' ? 146 : 120,
-    head: `${base}${P.key}-headshot.png`, headDark: `${base}${P.key}-headshot-dark.png`,
+    banner: P.member ? `${mbase}${state.anim}-banner.gif` : `${base}${state.anim}-banner-${P.key}.gif`, bannerH: P.bannerLogo === 'gc' ? 146 : 120,
+    head: P.member ? `${mbase}headshot.png` : `${base}${P.key}-headshot.png`, headDark: P.member ? `${mbase}headshot-dark.png` : `${base}${P.key}-headshot-dark.png`,
   };
   const L = (w = 176) => `<a href="${URL_}" style="text-decoration:none;">${img(u.lockup, w, Math.round(w * LH / 176), 'CMO Council')}</a>`;
   const orgLine = P.sub ? `${P.org} · ${P.sub}` : P.org;
@@ -393,11 +460,16 @@ ${td(k.L(110), 'padding-right:10px;')}${vr(Math.round(k.ART * 110 / 176), '#cccc
 
 // ---------- render ----------
 const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 function render() {
   const P = person();
-  if (!state.anim || !ANIMS.some(x => x[0] === state.anim)) state.anim = PEOPLE[state.who].anim;
-  $('people').innerHTML = Object.values(PEOPLE).map(p => `<button class="person" type="button" data-who="${p.key}" aria-pressed="${p.key === state.who}">
-    <img src="${PREVIEW}${p.key}-headshot.png" alt="" width="64" height="64"><span><b>${p.name}</b><span>${p.title}</span></span></button>`).join('');
+  if (!state.anim || !ANIMS.some(x => x[0] === state.anim)) state.anim = ALL()[state.who].anim;
+  const q = ($('pfind').value || '').trim().toLowerCase();
+  const list = [...Object.values(PEOPLE), ...Object.values(MEMBERS)].filter(p => !q || (p.name + ' ' + p.title).toLowerCase().includes(q));
+  $('pfind').parentElement.hidden = Object.keys(MEMBERS).length < 4;
+  $('people').innerHTML = list.map(p => `<button class="person" type="button" data-who="${p.key}" aria-pressed="${p.key === state.who}">
+    <img src="${p.member ? p.dir + 'headshot.png' : PREVIEW + p.key + '-headshot.png'}" alt="" width="64" height="64"><span><b>${p.name}</b><span>${p.title}</span></span></button>`).join('')
+    + PENDING.filter(p => !q || p.name.toLowerCase().includes(q)).map(p => `<div class="person pending" aria-disabled="true"><span class="spin" aria-hidden="true"></span><span><b>${esc(p.name)}</b><span>Building your signature. Usually ready in 10 to 15 minutes.</span></span></div>`).join('');
   fields.forEach(k => { const el = $('f-' + k); if (document.activeElement !== el) el.value = P[k] || ''; });
   [...$('logoSeg').children].forEach(b => b.setAttribute('aria-pressed', b.dataset.logo === P.logo));
   $('reel').innerHTML = ANIMS.map(([f, name, desc], i) => `<label class="clip"><input type="radio" name="anim" value="${f}" ${f === state.anim ? 'checked' : ''}>
@@ -413,8 +485,51 @@ function renderWall() {
     <div class="canvas${i === 5 ? ' center' : ''}"><div>${fn(P, k)}</div></div>
     <div class="foot"><span>${P.name} · ${A[1]}</span><div><button class="b" data-code="${i}">Copy HTML</button><button class="b primary" data-copy="${i}">Copy signature</button></div></div></article>`).join('');
 }
-$('people').addEventListener('click', e => { const b = e.target.closest('.person'); if (!b) return; state.who = b.dataset.who; state.anim = PEOPLE[state.who].anim; save(); render(); });
+$('people').addEventListener('click', e => { const b = e.target.closest('.person'); if (!b) return; state.who = b.dataset.who; state.anim = ALL()[state.who].anim; save(); render(); });
 $('reel').addEventListener('change', e => { state.anim = e.target.value; save(); renderWall(); toast(ANIMS.find(x => x[0] === state.anim)[1] + ' is now in every layout'); });
+
+// ---------- add your details ----------
+let photoBlob = null;
+const pcv = $('pcv'), pctx = pcv.getContext('2d');
+function drawPlaceholder() { pctx.fillStyle = '#f4f4f4'; pctx.fillRect(0, 0, 240, 240); pctx.fillStyle = '#9a9a9a'; pctx.font = '600 15px "Open Sans",Arial'; pctx.textAlign = 'center'; pctx.fillText('No photo yet', 120, 126); }
+drawPlaceholder();
+$('a-photo').addEventListener('change', async e => {
+  const f = e.target.files[0]; if (!f) return;
+  try {
+    const bmp = await createImageBitmap(f), s = Math.min(bmp.width, bmp.height);
+    const c = document.createElement('canvas'); c.width = c.height = 600; const x = c.getContext('2d');
+    x.drawImage(bmp, (bmp.width - s) / 2, (bmp.height - s) * .35, s, s, 0, 0, 600, 600); // square crop, a little above centre for faces
+    pctx.drawImage(c, 0, 0, 240, 240);
+    photoBlob = await new Promise(r => c.toBlob(r, 'image/jpeg', .9));
+    msg('', '');
+  } catch (_) { photoBlob = null; drawPlaceholder(); msg('That photo could not be read. Try a JPG or PNG.', 'bad'); }
+});
+function msg(t, cls) { const m = $('a-msg'); m.textContent = t; m.className = 'msg ' + cls; }
+$('addForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const v = id => $(id).value.trim();
+  const row = { name: v('a-name'), title: v('a-title'), email: v('a-email'), phone: v('a-phone') || null, city: v('a-city') || null };
+  if (row.name.length < 2) return msg('Add your full name.', 'bad');
+  if (row.title.length < 2) return msg('Add your position.', 'bad');
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(row.email)) return msg('That email address does not look right.', 'bad');
+  const go = $('a-go'); go.disabled = true; go.textContent = 'Sending…';
+  try {
+    row.id = crypto.randomUUID();
+    if (photoBlob) {
+      row.photo_path = row.id + '.jpg';
+      const up = await fetch(`${SB_URL}/storage/v1/object/cmo-signature-photos/${row.photo_path}`, { method: 'POST', headers: { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}`, 'Content-Type': 'image/jpeg' }, body: photoBlob });
+      if (!up.ok) throw new Error('photo');
+    }
+    const r = await fetch(`${SB_URL}/rest/v1/cmo_signature_members`, { method: 'POST', headers: { apikey: SB_KEY, Authorization: `Bearer ${SB_KEY}`, 'Content-Type': 'application/json', Prefer: 'return=minimal' }, body: JSON.stringify(row) });
+    if (!r.ok) throw new Error('row');
+    $('addForm').reset(); photoBlob = null; drawPlaceholder();
+    msg(`Thanks ${row.name.split(' ')[0]}. Your signature is being built and will appear in Step 1 in about 10 to 15 minutes.`, 'ok');
+    await loadPeople(); render();
+  } catch (err) {
+    msg(err.message === 'photo' ? 'The photo did not upload. Try a smaller JPG, or skip the photo.' : 'Something went wrong saving your details. Check your connection and try again.', 'bad');
+  } finally { go.disabled = false; go.textContent = 'Build my signature'; }
+});
+$('pfind').addEventListener('input', () => render());
 
 // ---------- copy ----------
 const tEl = $('toast'); let tt;

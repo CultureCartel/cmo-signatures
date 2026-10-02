@@ -1,0 +1,66 @@
+name: Publish new signature members
+
+# Checks for new sign-ups from cmo.culturecartel.ca every 10 minutes, renders their artwork,
+# and commits it. Also runs on demand from the Actions tab.
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-members
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      SUPABASE_URL: https://dvgxzbqlxuskepknlkhn.supabase.co
+      # publishable key: safe to be public, the table only allows reading visible rows and adding new ones
+      SUPABASE_KEY: sb_publishable_kRTF5Q3XWLw9kwVARbbdIQ_tVAuPYlB
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Anything new?
+        id: check
+        run: |
+          rows=$(curl -sf "$SUPABASE_URL/rest/v1/cmo_signature_members?select=id,email" -H "apikey: $SUPABASE_KEY" -H "Authorization: Bearer $SUPABASE_KEY" || echo "ERR")
+          if [ "$rows" = "ERR" ]; then echo "go=false" >> $GITHUB_OUTPUT; exit 0; fi
+          ids=$(echo "$rows" | python3 -c "import sys,json; print(' '.join(sorted(r['id'] for r in json.load(sys.stdin) if not r['email'].lower().endswith(('@example.com','@example.org')))))")
+          have=$(python3 -c "import json; print(' '.join(sorted(m['id'] for m in json.load(open('roster.json'))['members'])))")
+          if [ "$ids" = "$have" ]; then echo "go=false" >> $GITHUB_OUTPUT; else echo "go=true" >> $GITHUB_OUTPUT; fi
+
+      - uses: actions/setup-node@v4
+        if: steps.check.outputs.go == 'true'
+        with:
+          node-version: 22
+
+      - name: Install renderer
+        if: steps.check.outputs.go == 'true'
+        run: |
+          npm install --no-save playwright@1.56.1
+          npx playwright install --with-deps chromium
+          command -v ffmpeg || (sudo apt-get update && sudo apt-get install -y ffmpeg)
+
+      - name: Build and commit
+        if: steps.check.outputs.go == 'true'
+        run: |
+          git config user.name "cmo-signatures bot"
+          git config user.email "actions@users.noreply.github.com"
+          node source/build-members.mjs
+          git push
+
+      # GitHub pauses scheduled workflows in repos with no activity for 60 days.
+      # A tiny monthly heartbeat commit keeps the 10-minute check alive indefinitely.
+      - name: Keep the schedule alive
+        run: |
+          last=$(git log -1 --format=%ct)
+          if [ $(( $(date +%s) - last )) -gt $(( 45*24*3600 )) ]; then
+            git config user.name "cmo-signatures bot"
+            git config user.email "actions@users.noreply.github.com"
+            date -u +%FT%TZ > .heartbeat && git add .heartbeat && git commit -m "Heartbeat" && git push
+          fi

@@ -136,13 +136,20 @@ const BX = 214, NAME = 'Jarryd McDonald', TITLE = 'DIRECTOR, GLOBAL CIRCLE', ORG
 function bannerText(ctx, t, t0, style = 'rise') {
   const T = x => t - t0 - x;
   // vertical rule grows from the top
-  const NAME = WHO.name, TITLE = WHO.title, ORG = WHO.org;
+  const NAME = WHO.name, TITLE = WHO.title.toUpperCase(), ORG = WHO.org;
+  // shrink anything that would run past the banner edge (long names and titles from self-serve sign-ups)
+  const MAXW = 560 - BX - 12;
+  const fit = (font, size, min, text, spacing = 0) => { let s = size; for (; s > min; s -= .25) { ctx.font = font.replace('$', s); ctx.letterSpacing = spacing + 'px'; if (ctx.measureText(text).width <= MAXW) break; } ctx.letterSpacing = '0px'; return s; };
+  const nameSize = fit('800 $px M', 25, 15, NAME);
+  let tSpace = 2.2; ctx.font = '700 11px M'; ctx.letterSpacing = '2.2px'; if (ctx.measureText(TITLE).width > MAXW) tSpace = 1; ctx.letterSpacing = '1px'; if (ctx.measureText(TITLE).width > MAXW) tSpace = .5; ctx.letterSpacing = '0px';
+  const titleSize = fit('700 $px M', 11, 8.5, TITLE, tSpace);
+  const orgSize = fit('500 $px M', 13, 9.5, ORG);
   // baselines: plain logo ends at the COUNCIL baseline (111.5); the lockup ends at GLOBAL CIRCLE (GC_BASE)
   const Y = PLAIN ? { name: 38, title: 61, org: 84, strap: 111.5 } : { name: 66, title: 88, org: 111.5, strap: GC_BASE };
   const rp = E.inOutCubic(seg(T(0), 0, .55));
   ctx.fillStyle = RED; ctx.fillRect(194, OY, 2, (Y.strap - OY) * rp);
   // name: per-letter rise inside a mask
-  ctx.save(); ctx.font = '800 25px M'; ctx.fillStyle = INK;
+  ctx.save(); ctx.font = `800 ${nameSize}px M`; ctx.fillStyle = INK;
   ctx.beginPath(); ctx.rect(BX - 2, Y.name - 26, 360, 32); ctx.clip();
   let x = BX;
   [...NAME].forEach((ch, i) => {
@@ -152,11 +159,13 @@ function bannerText(ctx, t, t0, style = 'rise') {
   });
   ctx.restore();
   // title: tracking tightens as it fades in
-  ctx.save(); ctx.font = '700 11px M'; ctx.fillStyle = RED;
+  ctx.save(); ctx.font = `700 ${titleSize}px M`; ctx.fillStyle = RED;
   const tp = style === 'static' ? 1 : E.outCubic(seg(T(.45), 0, .8));
-  ctx.globalAlpha = tp; ctx.letterSpacing = lerp(9, 2.2, tp) + 'px'; ctx.fillText(TITLE, BX, Y.title); ctx.restore();
+  ctx.globalAlpha = tp; ctx.letterSpacing = tSpace + 'px';
+  const tw = ctx.measureText(TITLE).width, squeeze = tw > MAXW ? MAXW / tw : 1; // last resort: condense very long titles
+  ctx.letterSpacing = lerp(9, tSpace, tp) + 'px'; ctx.translate(BX, Y.title); ctx.scale(squeeze, 1); ctx.fillText(TITLE, 0, 0); ctx.restore();
   // org line slides in
-  ctx.save(); ctx.font = '500 13px M'; ctx.fillStyle = '#444444';
+  ctx.save(); ctx.font = `500 ${orgSize}px M`; ctx.fillStyle = '#444444';
   const op = style === 'static' ? 1 : E.outCubic(seg(T(.6), 0, .6));
   ctx.globalAlpha = op; ctx.fillText(ORG, BX - (1 - op) * 10, Y.org); ctx.restore();
   // strap: dot pops then text wipes on, sitting on the GLOBAL CIRCLE baseline
@@ -334,7 +343,7 @@ const SCENES = [
 // ---------- frame API ----------
 let ready = init();
 async function frame(si, variant, t, who = 'jarryd') {
-  await ready; PLAIN = variant.endsWith('-plain'); WHO = PEOPLE[who]; const sc = SCENES[si], [W, H] = SIZES[variant], cv = document.getElementById('c');
+  await ready; PLAIN = variant.endsWith('-plain'); WHO = typeof who === 'string' ? PEOPLE[who] : who; const sc = SCENES[si], [W, H] = SIZES[variant], cv = document.getElementById('c');
   if (cv.width !== W * DPR || cv.height !== H * DPR) { cv.width = W * DPR; cv.height = H * DPR; cv.style.width = W + 'px'; }
   if (sc.setup && !sc._s) { sc.setup(); sc._s = 1; }
   const ctx = cv.getContext('2d'); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 1; ctx.globalCompositeOperation = 'source-over';
@@ -352,7 +361,16 @@ async function frame(si, variant, t, who = 'jarryd') {
   }
   return cv.toDataURL('image/png');
 }
-window.SCENES = SCENES; window.frame = frame; window.ready = ready;
+// circular headshot on a solid background, or an initials badge when there is no photo
+async function avatar(src, bg, initials, size = 192) {
+  await ready; const c = document.createElement('canvas'); c.width = c.height = size; const x = c.getContext('2d');
+  x.fillStyle = bg; x.fillRect(0, 0, size, size);
+  x.save(); x.beginPath(); x.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2); x.clip();
+  if (src) { const im = await load(src); const s = Math.min(im.width, im.height); x.drawImage(im, (im.width - s) / 2, (im.height - s) * .35, s, s, 0, 0, size, size); }
+  else { x.fillStyle = RED; x.fillRect(0, 0, size, size); x.fillStyle = '#ffffff'; x.font = `800 ${size * .38}px M`; x.textAlign = 'center'; x.textBaseline = 'middle'; x.fillText(initials, size / 2, size / 2 + size * .02); }
+  x.restore(); return c.toDataURL('image/png');
+}
+window.SCENES = SCENES; window.frame = frame; window.ready = ready; window.avatar = avatar;
 // preview: ?s=0&v=lockup&t=5
 const q = new URLSearchParams(location.search); if (q.has('s')) frame(+q.get('s'), q.get('v') || 'lockup', +(q.get('t') || 5));
 </script>
