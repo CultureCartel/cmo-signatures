@@ -3,175 +3,235 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>CMO Council Signatures</title>
+<title>CMO Council Signature Studio</title>
 <style>
-@font-face{font-family:Montserrat;font-weight:500;src:url(fonts/m500.woff) format("woff")}
-@font-face{font-family:Montserrat;font-weight:600;src:url(fonts/m600.woff) format("woff")}
-@font-face{font-family:Montserrat;font-weight:700;src:url(fonts/m700.woff) format("woff")}
-@font-face{font-family:Montserrat;font-weight:800 900;src:url(fonts/m800.woff) format("woff")}
-/* Layout: a private screening room for the Council's signatures. Gate, then person tabs, the stage, the motion reel and the layout wall. */
+@font-face{font-family:"Open Sans";font-weight:400;src:url(fonts/os400.woff) format("woff")}
+@font-face{font-family:"Open Sans";font-weight:600;src:url(fonts/os600.woff) format("woff")}
+@font-face{font-family:"Open Sans";font-weight:700;src:url(fonts/os700.woff) format("woff")}
+@font-face{font-family:"Open Sans";font-weight:800;src:url(fonts/os800.woff) format("woff")}
+/* Layout: built in the CMO Council's own site language. Red utility bar, white masthead, black nav, black section bars with a red dot, square red buttons, navy feature panel. Single light theme on purpose, like cmocouncil.org. */
 :root{
-  --bg:#efedec; --surface:#fbfafa; --ink:#151314; --muted:#6d6567; --line:#dcd7d7;
-  --red:#E1202D; --red-ink:#b3121c; --paper:#ffffff; --tint:#f8e3e4;
-  --shadow:0 1px 2px rgba(30,10,12,.06),0 12px 40px -12px rgba(30,10,12,.18);
-  --display:"Montserrat","Helvetica Neue",Arial,sans-serif; --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  color-scheme:light;
+  --red:#E31E2F; --red-dark:#b8141f; --black:#000000; --ink:#1a1a1a; --muted:#5f5f5f; --rule:#e2e2e2;
+  --paper:#ffffff; --wash:#f4f4f4; --navy:#050a24;
+  --font:"Open Sans",Arial,Helvetica,sans-serif; --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
 }
-@media (prefers-color-scheme: dark){:root{
-  --bg:#141213; --surface:#1d1a1b; --ink:#f4efef; --muted:#a69d9f; --line:#332e2f;
-  --red:#ff3d49; --red-ink:#ff6d76; --tint:#3b1a1d; --shadow:0 1px 2px rgba(0,0,0,.4),0 18px 50px -16px rgba(0,0,0,.7); color-scheme:dark}}
 *{box-sizing:border-box}
 html,body{margin:0}
-body{background:var(--bg);color:var(--ink);font-family:var(--display);font-size:15px;line-height:1.55;padding-inline:20px;padding-block:0 72px;-webkit-font-smoothing:antialiased}
+body{background:var(--paper);color:var(--ink);font-family:var(--font);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
 [hidden]{display:none!important}
-.wrap{max-width:1200px;margin:0 auto}
-.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--red-ink);margin:0}
+.in{max-width:1136px;margin:0 auto;padding-inline:20px}
+a{color:var(--red)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:700 13px var(--font);text-transform:uppercase;letter-spacing:.04em;border:2px solid var(--red);background:var(--red);color:#fff;padding:9px 16px;cursor:pointer;border-radius:0;text-decoration:none}
+.btn:hover{background:var(--red-dark);border-color:var(--red-dark)}
+.btn.ghost{background:#fff;color:var(--red)}
+.btn.ghost:hover{background:var(--red);color:#fff}
+.btn:focus-visible,button:focus-visible{outline:3px solid var(--black);outline-offset:2px}
+
+/* chrome */
+.util{background:var(--red);color:#fff}
+.util .in{display:flex;justify-content:space-between;align-items:center;min-height:40px;gap:12px;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.util b{font-weight:800}
+.mast .in{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;padding-block:18px}
+.mast img{width:150px;height:auto;display:block}
+.stats{color:var(--red);font-weight:800;text-transform:uppercase;font-size:15px;line-height:1.5;letter-spacing:.01em}
+.nav{background:var(--black)}
+.nav .in{display:flex;flex-wrap:wrap}
+.nav a{color:#fff;text-decoration:none;font-weight:700;font-size:14px;text-transform:uppercase;letter-spacing:.02em;padding:11px 18px}
+.nav a:first-child{background:var(--red)}
+.nav a:hover{background:#222}
+.nav a:first-child:hover{background:var(--red-dark)}
 
 /* gate */
-.gate{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding-block:40px}
-.gate form{width:min(420px,100%);background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);overflow:hidden}
-.gate .plate{background:var(--paper);display:grid;place-items:center;padding:30px 20px 22px}
+.gate{min-height:calc(100vh - 40px);min-height:calc(100dvh - 40px);display:grid;place-items:center;padding:40px 20px;background:var(--wash)}
+.gate form{width:min(440px,100%);background:#fff;border:1px solid var(--rule)}
+.gate .plate{display:grid;place-items:center;padding:30px 20px 20px}
 .gate .plate img{width:176px;height:auto;display:block}
-.gate .body{padding:22px 24px 24px;display:grid;gap:12px}
-.gate h1{margin:0;font-weight:900;font-size:26px;letter-spacing:-.02em;line-height:1.1}
+.gate .bar{background:var(--black);color:#fff;display:flex;align-items:center;gap:12px;padding:12px 22px;font-weight:800;text-transform:uppercase;font-size:17px;letter-spacing:.02em}
+.gate .body{padding:20px 22px 24px;display:grid;gap:12px}
 .gate p{margin:0;color:var(--muted);font-size:14px}
-.gate label{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.gate label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--ink)}
 .gate .row{display:flex;gap:8px}
-.gate input{flex:1;min-width:0;font:600 16px var(--display);padding:11px 13px;border-radius:9px;border:1px solid var(--line);background:var(--bg);color:var(--ink);letter-spacing:.1em}
-.gate input:focus{outline:2px solid var(--red);outline-offset:1px}
-.gate .err{color:var(--red-ink);font-size:13px;font-weight:600;min-height:1.2em}
+.gate input{flex:1;min-width:0;font:600 16px var(--font);padding:10px 12px;border:1px solid #bdbdbd;border-radius:0;background:#fff;color:var(--ink);letter-spacing:.12em}
+.gate input:focus{outline:2px solid var(--red);outline-offset:0;border-color:var(--red)}
+.gate .err{color:var(--red);font-size:13px;font-weight:700;min-height:1.2em}
+.gate .spons{display:flex;align-items:center;justify-content:center;gap:10px;padding:14px;background:var(--black);color:#aaa;font-size:11px;text-transform:uppercase;letter-spacing:.12em;font-weight:700}
+.gate .spons img{height:42px;width:auto;display:block}
 .shake{animation:shake .35s}
 @keyframes shake{25%{transform:translateX(-6px)}50%{transform:translateX(6px)}75%{transform:translateX(-3px)}}
 
-/* studio */
-header{padding-block:44px 6px;display:grid;gap:14px}
-h1.big{font-weight:900;font-size:clamp(34px,6vw,72px);line-height:.92;letter-spacing:-.035em;margin:0;text-wrap:balance}
-h1.big em{font-style:normal;color:var(--red)}
-.lede{max-width:64ch;color:var(--muted);margin:0}
-.people{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
-.person{display:flex;align-items:center;gap:12px;padding:8px 16px 8px 8px;border-radius:999px;border:1px solid var(--line);background:var(--surface);cursor:pointer;font:inherit;color:inherit;text-align:left}
-.person img{width:40px;height:40px;border-radius:50%;display:block}
-.person b{display:block;font-size:14px;font-weight:800;line-height:1.2}
-.person span{display:block;font-size:12px;color:var(--muted);line-height:1.3}
-.person[aria-pressed="true"]{border-color:var(--red);box-shadow:0 0 0 3px var(--tint)}
-.person:focus-visible{outline:2px solid var(--red);outline-offset:2px}
-.stage{margin-top:22px;background:var(--paper);border-radius:14px;box-shadow:var(--shadow);padding:clamp(18px,4vw,46px);display:grid;gap:18px}
-.stage .screen{display:flex;justify-content:center}
-.stage .screen img{width:100%;max-width:840px;height:auto;display:block}
-.stage .bar{display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;align-items:baseline;border-top:1px solid #ece7e7;padding-top:14px;color:#6d6567;font-family:var(--mono);font-size:12px}
-.stage .bar b{color:#E1202D;font-weight:600}
-section{padding-block:48px 0}
-.sec-head{display:grid;grid-template-columns:auto 1fr;gap:6px 28px;align-items:end;margin-bottom:18px}
-h2{font-weight:800;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.02em;margin:0;line-height:1.1}
-h2 small{display:block;font-family:var(--mono);font-weight:400;font-size:12px;color:var(--muted);letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px}
-.hint{color:var(--muted);font-size:14px;margin:0;max-width:62ch;justify-self:end;text-align:right}
-.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 16px}
+/* feature */
+.feature{background:var(--navy);color:#fff}
+.feature .in{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(20px,4vw,48px);align-items:center;padding-block:clamp(28px,5vw,52px)}
+.feature h1{margin:0 0 12px;font-weight:800;font-size:clamp(30px,4.4vw,48px);line-height:1.05;text-transform:uppercase;letter-spacing:-.005em;text-wrap:balance}
+.feature h1 span{color:var(--red)}
+.feature p{margin:0 0 18px;color:#cfd3e6;font-size:16px;max-width:46ch}
+.screen{background:#fff;padding:clamp(12px,2.4vw,24px);border:1px solid #20264a}
+.screen img{width:100%;height:auto;display:block}
+.screen .cap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 16px;margin-top:12px;padding-top:10px;border-top:1px solid var(--rule);font-size:12px;color:var(--muted)}
+.screen .cap b{color:var(--red);text-transform:uppercase;letter-spacing:.04em}
+
+/* section bars */
+section{padding-block:34px 0}
+.sbar{display:flex;align-items:center;gap:14px;background:var(--black);color:#fff;padding:10px 20px;margin-bottom:18px}
+.sbar::before{content:"";width:20px;height:20px;border-radius:50%;background:var(--red);flex:none}
+.sbar h2{margin:0;font-size:clamp(18px,2.2vw,22px);font-weight:800;text-transform:uppercase;letter-spacing:.01em;line-height:1.2}
+.sbar small{margin-left:auto;font-size:12px;color:#bbb;font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.lead{margin:-4px 0 16px;color:var(--muted);max-width:72ch}
+
+/* people */
+.people{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.person{display:flex;align-items:center;gap:14px;padding:14px;border:1px solid var(--rule);background:#fff;cursor:pointer;font:inherit;color:inherit;text-align:left;border-radius:0;position:relative}
+.person img{width:64px;height:64px;border-radius:50%;display:block;flex:none}
+.person b{display:block;font-size:16px;font-weight:800;line-height:1.25}
+.person span span{display:block;font-size:13px;color:var(--muted);line-height:1.35;margin-top:2px}
+.person[aria-pressed="true"]{border:2px solid var(--red);padding:13px;box-shadow:inset 0 -4px 0 var(--red)}
+.person:hover{border-color:#bdbdbd}
+.panel{margin-top:14px;border:1px solid var(--rule);background:var(--wash);padding:14px 16px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 16px}
 .panel .f{display:grid;gap:5px;min-width:0}
-.panel label{font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.panel input{font:500 14px var(--display);padding:9px 11px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);min-width:0;width:100%}
-.panel input:focus{outline:2px solid var(--red);outline-offset:1px}
-.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--bg)}
-.seg button{flex:1;border:0;border-radius:0;background:transparent;font:700 12.5px var(--display);padding:9px 8px;color:var(--muted);cursor:pointer}
+.panel label{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.panel input{font:600 14px var(--font);padding:9px 11px;border:1px solid #c9c9c9;border-radius:0;background:#fff;color:var(--ink);min-width:0;width:100%}
+.panel input:focus{outline:2px solid var(--red);outline-offset:0}
+.seg{display:flex;border:2px solid var(--red)}
+.seg button{flex:1;border:0;border-radius:0;background:#fff;font:700 12px var(--font);text-transform:uppercase;letter-spacing:.04em;padding:8px 6px;color:var(--red);cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--red);color:#fff}
+
+/* reel */
 .reel{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
-.clip{position:relative;display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);border-radius:12px;cursor:pointer;transition:transform .18s,box-shadow .18s}
-.clip:hover{transform:translateY(-3px);box-shadow:var(--shadow)}
+.clip{position:relative;display:flex;flex-direction:column;border:1px solid var(--rule);background:#fff;cursor:pointer}
 .clip input{position:absolute;opacity:0;pointer-events:none}
-.clip:has(input:checked){border-color:var(--red);box-shadow:0 0 0 3px var(--tint),var(--shadow)}
-.clip:has(input:focus-visible){outline:2px solid var(--red);outline-offset:3px}
-.clip .plate{background:var(--paper);border-radius:11px 11px 0 0;display:grid;place-items:center;padding:14px 8px;min-height:174px}
+.clip:hover{border-color:#bdbdbd}
+.clip:has(input:checked){border:2px solid var(--red);box-shadow:inset 0 -4px 0 var(--red)}
+.clip:has(input:focus-visible){outline:3px solid var(--black);outline-offset:2px}
+.clip .plate{display:grid;place-items:center;padding:12px 8px;min-height:170px;border-bottom:1px solid var(--rule)}
 .clip .plate img{width:176px;max-width:100%;height:auto;display:block}
-.clip .meta{padding:12px 14px 14px;display:grid;gap:4px;align-content:start}
+.clip .meta{padding:10px 12px 14px;display:grid;gap:3px}
 .clip .row{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.clip h3{margin:0;font-size:15px;font-weight:800}
-.clip .n{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.clip h3{margin:0;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.01em}
+.clip .n{font-size:12px;font-weight:800;color:var(--red)}
 .clip p{margin:0;font-size:12.5px;color:var(--muted);line-height:1.45}
-.wall{display:grid;gap:18px}
-.lay{background:var(--surface);border:1px solid var(--line);border-radius:12px;display:flex;flex-direction:column;min-width:0}
-.lay .top{padding:14px 16px;border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:baseline}
-.lay .top em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--muted)}
-.lay h3{margin:0;font-size:15.5px;font-weight:800}
-.lay .use{margin:2px 0 0;font-size:13px;color:var(--muted)}
-.lay .canvas{background:var(--paper);padding:34px clamp(18px,4vw,48px);overflow-x:auto;display:flex;align-items:center;min-height:220px}
+
+/* layouts */
+.wall{display:grid;gap:16px}
+.lay{border:1px solid var(--rule);background:#fff;display:flex;flex-direction:column;min-width:0}
+.lay .top{display:flex;gap:12px;align-items:baseline;padding:12px 16px;border-bottom:1px solid var(--rule);background:var(--wash)}
+.lay .top em{font-style:normal;font-weight:800;color:var(--red);font-size:13px}
+.lay h3{margin:0;font-size:14.5px;font-weight:800;text-transform:uppercase;letter-spacing:.01em}
+.lay .use{margin:1px 0 0;font-size:13px;color:var(--muted)}
+.lay .canvas{padding:30px clamp(16px,4vw,44px);overflow-x:auto;display:flex;align-items:center;min-height:210px}
 .lay .canvas.center{justify-content:center}
-.lay .foot{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--line)}
-.lay .foot span{font-family:var(--mono);font-size:11px;color:var(--muted)}
-.lay .foot div{display:flex;gap:6px}
-button.b{font:700 12.5px var(--display);border-radius:8px;padding:9px 13px;cursor:pointer;border:1px solid var(--line);background:var(--bg);color:var(--ink)}
-button.b.primary{background:var(--red);border-color:var(--red);color:#fff}
-button.b:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+.lay .foot{display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--rule)}
+.lay .foot span{font-size:12px;color:var(--muted);font-weight:600}
+.lay .foot div{display:flex;gap:8px}
+button.b{font:700 12px var(--font);text-transform:uppercase;letter-spacing:.04em;border-radius:0;padding:8px 14px;cursor:pointer;border:2px solid var(--red);background:#fff;color:var(--red)}
+button.b.primary{background:var(--red);color:#fff}
+button.b:hover{background:var(--red-dark);border-color:var(--red-dark);color:#fff}
+
+/* install */
 .notes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
-.note{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px 18px}
-.note h3{margin:0 0 6px;font-size:14.5px;font-weight:800}
+.note{border:1px solid var(--rule);border-top:4px solid var(--red);padding:14px 16px;background:#fff}
+.note h3{margin:0 0 6px;font-size:14px;font-weight:800;text-transform:uppercase}
 .note ol,.note p{margin:0;padding-left:18px;color:var(--muted);font-size:13px}
 .note p{padding-left:0}
-.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px;font-size:13.5px;font-weight:600;opacity:0;transition:.2s;pointer-events:none;z-index:9}
+
+/* footer */
+footer{margin-top:52px;background:var(--black);color:#bdbdbd}
+footer .in{display:grid;grid-template-columns:auto 1fr auto;gap:20px 36px;align-items:center;padding-block:30px}
+footer .sp{font-size:11.5px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:#9a9a9a;margin-bottom:8px}
+footer .cc img{height:64px;width:auto;display:block}
+footer p{margin:0;font-size:13.5px;max-width:58ch}
+footer p b{color:#fff}
+footer .links{display:grid;gap:6px;justify-items:end;font-size:13px}
+footer .links a{color:#fff;text-decoration:none;font-weight:700}
+footer .links a:hover{color:var(--red)}
+footer .legal{border-top:1px solid #222}
+footer .legal .in{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-block:12px;font-size:12px;color:#7a7a7a;grid-template-columns:none}
+.lock{background:none;border:0;color:#9a9a9a;font:600 12px var(--font);cursor:pointer;text-decoration:underline;padding:0}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%) translateY(20px);background:var(--black);color:#fff;border-left:5px solid var(--red);padding:11px 16px;font-size:13.5px;font-weight:700;opacity:0;transition:.2s;pointer-events:none;z-index:9}
 .toast.on{opacity:1;transform:translateX(-50%)}
 #scratch{position:fixed;left:-9999px;top:0}
-.lock{background:none;border:0;color:var(--muted);font:600 12px var(--display);cursor:pointer;text-decoration:underline;padding:0;justify-self:start}
-@media (max-width:1060px){.reel{grid-template-columns:repeat(3,minmax(0,1fr))}.panel{grid-template-columns:repeat(2,minmax(0,1fr))}.notes{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media (max-width:640px){.reel{grid-template-columns:repeat(2,minmax(0,1fr))}.sec-head{grid-template-columns:1fr}.hint{justify-self:start;text-align:left}.notes,.panel{grid-template-columns:1fr}}
-@media (prefers-reduced-motion:reduce){.clip{transition:none}.clip:hover{transform:none}.shake{animation:none}}
+@media (max-width:1000px){.reel{grid-template-columns:repeat(3,minmax(0,1fr))}.panel,.notes{grid-template-columns:repeat(2,minmax(0,1fr))}.feature .in{grid-template-columns:1fr}.people{grid-template-columns:1fr}}
+@media (max-width:640px){.reel{grid-template-columns:repeat(2,minmax(0,1fr))}.panel,.notes{grid-template-columns:1fr}.stats{font-size:13px}.util .in span:last-child{display:none}footer .in{grid-template-columns:1fr}footer .links{justify-items:start}.sbar small{display:none}}
+@media (prefers-reduced-motion:reduce){.shake{animation:none}.toast{transition:none}}
 </style>
 </head>
 <body>
+<div class="util"><div class="in"><span><b>CMO Council</b> · Signature Studio</span><span>Members of the team only</span></div></div>
 
-<div class="gate" id="gate">
+<div id="gate" class="gate">
   <form id="gateForm" autocomplete="off">
     <div class="plate"><img id="gateLogo" alt="CMO Council" width="176" height="120"></div>
+    <div class="bar"><span style="width:16px;height:16px;border-radius:50%;background:#E31E2F;flex:none"></span>Signature Studio</div>
     <div class="body">
-      <p class="eyebrow">Private · CMO Council</p>
-      <h1>Signature Studio</h1>
       <p>Animated email signatures for the CMO Council team. Enter the password to continue.</p>
       <label for="pw">Password</label>
-      <div class="row"><input id="pw" type="password" autocomplete="off" autofocus><button class="b primary" type="submit">Enter</button></div>
+      <div class="row"><input id="pw" type="password" autocomplete="off" autofocus><button class="btn" type="submit">Enter</button></div>
       <div class="err" id="err" role="alert"></div>
     </div>
+    <div class="spons">Sponsored by <img src="assets/culture-cartel-white.png" alt="Culture Cartel" width="74" height="42"></div>
   </form>
 </div>
 
-<div class="wrap" id="app" hidden>
-  <header>
-    <p class="eyebrow">CMO Council · Signature Studio</p>
-    <h1 class="big">Signatures,<br><em>in motion.</em></h1>
-    <p class="lede">Pick your name, pick an animation, pick a layout, then hit Copy signature and paste it into your mail settings. Every animation is rendered from the official CMO Council artwork and served from a permanent, version-locked address.</p>
-    <div class="people" id="people" role="group" aria-label="Whose signature"></div>
-  </header>
+<div id="app" hidden>
+  <div class="mast"><div class="in">
+    <a href="https://www.cmocouncil.org" aria-label="CMO Council"><img src="assets/cmo-council-logo.png" alt="CMO Council" width="150" height="97"></a>
+    <div class="stats">25 years of marketing leadership<br>10 animations · 10 layouts<br>One click to copy</div>
+  </div></div>
+  <nav class="nav" aria-label="Steps"><div class="in"><a href="#who">Choose your name</a><a href="#motion">Animation</a><a href="#layouts">Layout</a><a href="#install">Install</a></div></nav>
 
-  <div class="stage">
-    <div class="screen"><img id="hero" alt="Animated signature banner" width="560" height="146"></div>
-    <div class="bar"><span>Now playing · <b id="nowName"></b></span><span>Banner 560 px · Lockup 176 px · 2× retina · 30 fps · frame 1 is the finished logo</span></div>
+  <div class="feature"><div class="in">
+    <div>
+      <h1>Your signature, <span>in motion</span></h1>
+      <p>Rendered frame by frame from the official CMO Council artwork. Pick your name, an animation and a layout, then copy it straight into your email.</p>
+      <a class="btn" href="#layouts">Get my signature</a>
+    </div>
+    <div class="screen"><img id="hero" alt="Animated signature banner" width="560" height="120">
+      <div class="cap"><span>Now playing: <b id="nowName"></b></span><span>Frame one is always the finished logo</span></div></div>
+  </div></div>
+
+  <div class="in">
+    <section id="who">
+      <div class="sbar"><h2>Step 1 · Choose your name</h2><small>Check your details</small></div>
+      <div class="people" id="people" role="group" aria-label="Whose signature"></div>
+      <div class="panel" id="panel">
+        <div class="f"><label for="f-phone">Mobile</label><input id="f-phone"></div>
+        <div class="f"><label for="f-email">Email</label><input id="f-email" type="email"></div>
+        <div class="f"><label for="f-city">Location</label><input id="f-city"></div>
+        <div class="f"><label>Logo</label><div class="seg" id="logoSeg"><button type="button" data-logo="plain">CMO Council</button><button type="button" data-logo="gc">Global Circle</button></div></div>
+      </div>
+    </section>
+
+    <section id="motion">
+      <div class="sbar"><h2>Step 2 · Choose the animation</h2><small>10 options</small></div>
+      <p class="lead">Every loop opens on the finished logo, so Outlook for Windows, which only shows the first frame, still looks right.</p>
+      <div class="reel" id="reel" role="radiogroup" aria-label="Animation"></div>
+    </section>
+
+    <section id="layouts">
+      <div class="sbar"><h2>Step 3 · Choose the layout and copy</h2><small>10 layouts</small></div>
+      <p class="lead">Copy signature puts the formatted signature on your clipboard. Copy HTML gives you the raw code for tools that ask for it.</p>
+      <div class="wall" id="wall"></div>
+    </section>
+
+    <section id="install">
+      <div class="sbar"><h2>Step 4 · Install it</h2></div>
+      <div class="notes">
+        <div class="note"><h3>Gmail</h3><ol><li>Gear icon, See all settings.</li><li>Scroll to Signature, Create new, paste.</li><li>Scroll down and Save Changes.</li></ol></div>
+        <div class="note"><h3>Outlook</h3><ol><li>Settings, Account, Signatures.</li><li>New signature, paste, save.</li><li>Set it as the default for new mail and replies.</li></ol></div>
+        <div class="note"><h3>Apple Mail</h3><ol><li>Mail, Settings, Signatures, plus.</li><li>Untick “Always match my default message font”.</li><li>Paste. It animates in Mail and iOS Mail.</li></ol></div>
+        <div class="note"><h3>Good to know</h3><p>Use Compact Reply for long threads. Outlook for Windows shows a still, finished logo. Everywhere else animates.</p></div>
+      </div>
+    </section>
   </div>
 
-  <section>
-    <div class="sec-head"><h2><small>Step 1</small>Check your details</h2><p class="hint">These fill the text and links. Your name and title inside the banner animation are fixed.</p></div>
-    <div class="panel" id="panel">
-      <div class="f"><label for="f-phone">Mobile</label><input id="f-phone"></div>
-      <div class="f"><label for="f-email">Email</label><input id="f-email" type="email"></div>
-      <div class="f"><label for="f-city">Location</label><input id="f-city"></div>
-      <div class="f"><label>Logo</label><div class="seg" id="logoSeg"><button type="button" data-logo="plain">CMO Council</button><button type="button" data-logo="gc">Global Circle</button></div></div>
+  <footer>
+    <div class="in">
+      <div class="cc"><div class="sp">Sponsored by</div><a href="https://www.culturecartel.ca" aria-label="Culture Cartel"><img src="assets/culture-cartel-white.png" alt="Culture Cartel" width="113" height="64"></a></div>
+      <p><b>Built and sponsored by Culture Cartel</b>, the Toronto studio behind strategy, creative and digital execution for brands that want to be chosen. Proud to support the CMO Council in its 25th year.</p>
+      <div class="links"><a href="https://www.culturecartel.ca">culturecartel.ca</a><a href="https://www.cmocouncil.org">cmocouncil.org</a></div>
     </div>
-  </section>
-
-  <section>
-    <div class="sec-head"><h2><small>Step 2</small>Choose the motion</h2><p class="hint">Every loop opens on the finished logo, so Outlook for Windows, which only shows frame one, still looks right.</p></div>
-    <div class="reel" id="reel" role="radiogroup" aria-label="Animation"></div>
-  </section>
-
-  <section>
-    <div class="sec-head"><h2><small>Step 3</small>Choose the layout and copy</h2><p class="hint">Copy signature puts formatted HTML on your clipboard. Copy HTML gives you the raw code for tools that want it.</p></div>
-    <div class="wall" id="wall"></div>
-  </section>
-
-  <section>
-    <div class="sec-head"><h2><small>Step 4</small>Install it</h2></div>
-    <div class="notes">
-      <div class="note"><h3>Gmail</h3><ol><li>Settings, See all settings, General, Signature.</li><li>Create new and paste.</li><li>Scroll down and Save Changes.</li></ol></div>
-      <div class="note"><h3>Outlook web and new Outlook</h3><ol><li>Settings, Account, Signatures.</li><li>New signature, paste, save.</li><li>Set it as the default for new mail and replies.</li></ol></div>
-      <div class="note"><h3>Apple Mail</h3><ol><li>Mail, Settings, Signatures, plus.</li><li>Untick “Always match my default message font”.</li><li>Paste. GIFs animate in Mail and iOS Mail.</li></ol></div>
-      <div class="note"><h3>Good to know</h3><p>Use the Compact Reply layout for long threads. Outlook for Windows shows a still, finished logo. Everywhere else animates.</p></div>
-    </div>
-  </section>
-  <section><button class="lock" id="lockBtn" type="button">Lock this page</button></section>
+    <div class="legal"><div class="in"><span>CMO Council and its logo are trademarks of the CMO Council. Signature artwork hosted permanently.</span><button class="lock" id="lockBtn" type="button">Lock this page</button></div></div>
+  </footer>
 </div>
 <div id="scratch" contenteditable="true" aria-hidden="true"></div>
 <div class="toast" id="toast" role="status"></div>
@@ -197,19 +257,19 @@ const ANIMS = [
   ['10-coin','Gold Standard','The disc spins in like a minted coin, then a gloss pass.'],
 ];
 const PEOPLE = {
-  jarryd: { key:'jarryd', name:'Jarryd McDonald', title:'Director, Global Circle', org:'CMO Council', sub:'North America Advisory Board',
-    phone:'+1 647.459.2154', email:'jarryd@cmocouncil.org', city:'Toronto, Canada', logo:'gc', bannerLogo:'gc',
-    line:'Turning North America’s top marketers into an active network.', cta:'Join the Global Circle', anim:'03-liquid' },
   donovan: { key:'donovan', name:'Donovan Neale-May', title:'Executive Director', org:'CMO Council', sub:'San Jose, USA',
     phone:'+1 650.222.5260', email:'donovan@cmocouncil.org', city:'San Jose, USA', logo:'plain', bannerLogo:'plain',
     line:'25 years of connecting the world’s marketing leaders.', cta:'Explore the CMO Council', anim:'05-twentyfive' },
   bryan: { key:'bryan', name:'Bryan DeRose', title:'SVP, Business & Program Development', org:'CMO Council', sub:'',
     phone:'+1 408.921.1577', email:'bderose@cmocouncil.org', city:'', logo:'plain', bannerLogo:'plain',
     line:'Building the programs that move marketing leaders forward.', cta:'Explore the CMO Council', anim:'07-iris' },
+  jarryd: { key:'jarryd', name:'Jarryd McDonald', title:'Director, Global Circle', org:'CMO Council', sub:'North America Advisory Board',
+    phone:'+1 647.459.2154', email:'jarryd@cmocouncil.org', city:'Toronto, Canada', logo:'gc', bannerLogo:'gc',
+    line:'Turning North America’s top marketers into an active network.', cta:'Join the Global Circle', anim:'03-liquid' },
 };
 const WEB = 'cmocouncil.org', URL_ = 'https://www.cmocouncil.org', RED = '#E1202D', F = 'font-family:Arial,Helvetica,sans-serif;';
 
-let state = { who:'jarryd', anim:null, logo:null, edits:{} };
+let state = { who:'donovan', anim:null, logo:null, edits:{} };
 try { Object.assign(state, JSON.parse(localStorage.getItem('cmo-sig-state') || '{}')); } catch (e) {}
 const save = () => { try { localStorage.setItem('cmo-sig-state', JSON.stringify(state)); } catch (e) {} };
 
@@ -337,7 +397,7 @@ function render() {
   const P = person();
   if (!state.anim || !ANIMS.some(x => x[0] === state.anim)) state.anim = PEOPLE[state.who].anim;
   $('people').innerHTML = Object.values(PEOPLE).map(p => `<button class="person" type="button" data-who="${p.key}" aria-pressed="${p.key === state.who}">
-    <img src="${PREVIEW}${p.key}-headshot.png" alt="" width="40" height="40"><span><b>${p.name}</b><span>${p.title}</span></span></button>`).join('');
+    <img src="${PREVIEW}${p.key}-headshot.png" alt="" width="64" height="64"><span><b>${p.name}</b><span>${p.title}</span></span></button>`).join('');
   fields.forEach(k => { const el = $('f-' + k); if (document.activeElement !== el) el.value = P[k] || ''; });
   [...$('logoSeg').children].forEach(b => b.setAttribute('aria-pressed', b.dataset.logo === P.logo));
   $('reel').innerHTML = ANIMS.map(([f, name, desc], i) => `<label class="clip"><input type="radio" name="anim" value="${f}" ${f === state.anim ? 'checked' : ''}>
