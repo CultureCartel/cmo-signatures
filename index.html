@@ -179,7 +179,8 @@ button.b:focus-visible{outline:2px solid var(--red);outline-offset:2px}
 <script>
 // Artwork is served from jsDelivr pinned to an exact commit, so the URLs in copied signatures never change.
 const PINNED = 'https://cdn.jsdelivr.net/gh/CultureCartel/cmo-signatures@e37cc1a77d6026b9726aaf645e5c1ecc1959a539/assets/';
-const ASSETS = PINNED.startsWith('__') ? new URL('assets/', location.href).href : PINNED;
+const ASSETS = PINNED.startsWith('__') ? new URL('assets/', location.href).href : PINNED; // used in copied signatures
+const PREVIEW = 'assets/'; // on-page previews load the same files from beside the page
 const PASS = 'cmo';
 const KEY = 'cmo-sig-unlocked';
 
@@ -214,7 +215,7 @@ const save = () => { try { localStorage.setItem('cmo-sig-state', JSON.stringify(
 
 // ---------- gate ----------
 const gate = document.getElementById('gate'), app = document.getElementById('app');
-document.getElementById('gateLogo').src = ASSETS + '06-orbits-lockup-plain.gif';
+document.getElementById('gateLogo').src = PREVIEW + '06-orbits-lockup-plain.gif';
 function unlocked() { try { return localStorage.getItem(KEY) === '1' || sessionStorage.getItem(KEY) === '1'; } catch (e) { return false; } }
 function open() { gate.hidden = true; app.hidden = false; render(); }
 document.getElementById('gateForm').addEventListener('submit', e => {
@@ -253,12 +254,12 @@ const vr = (h, color = RED, w = 2) => `<td style="vertical-align:middle;"><table
 const lab = (l) => `<b style="color:${RED};">${l}</b>&nbsp;&nbsp;`;
 const gap = (h) => `<div style="height:${h}px;line-height:${h}px;font-size:0;">&nbsp;</div>`;
 
-function kit(P) {
+function kit(P, base = ASSETS) {
   const gc = P.logo === 'gc', LH = gc ? 146 : 120, ART = gc ? 130 : 104; // art = disc top to last baseline
   const u = {
-    lockup: `${ASSETS}${state.anim}-lockup${gc ? '' : '-plain'}.gif`,
-    banner: `${ASSETS}${state.anim}-banner-${P.key}.gif`, bannerH: P.bannerLogo === 'gc' ? 146 : 120,
-    head: `${ASSETS}${P.key}-headshot.png`, headDark: `${ASSETS}${P.key}-headshot-dark.png`,
+    lockup: `${base}${state.anim}-lockup${gc ? '' : '-plain'}.gif`,
+    banner: `${base}${state.anim}-banner-${P.key}.gif`, bannerH: P.bannerLogo === 'gc' ? 146 : 120,
+    head: `${base}${P.key}-headshot.png`, headDark: `${base}${P.key}-headshot-dark.png`,
   };
   const L = (w = 176) => `<a href="${URL_}" style="text-decoration:none;">${img(u.lockup, w, Math.round(w * LH / 176), 'CMO Council')}</a>`;
   const orgLine = P.sub ? `${P.org} · ${P.sub}` : P.org;
@@ -336,16 +337,16 @@ function render() {
   const P = person();
   if (!state.anim || !ANIMS.some(x => x[0] === state.anim)) state.anim = PEOPLE[state.who].anim;
   $('people').innerHTML = Object.values(PEOPLE).map(p => `<button class="person" type="button" data-who="${p.key}" aria-pressed="${p.key === state.who}">
-    <img src="${ASSETS}${p.key}-headshot.png" alt="" width="40" height="40"><span><b>${p.name}</b><span>${p.title}</span></span></button>`).join('');
+    <img src="${PREVIEW}${p.key}-headshot.png" alt="" width="40" height="40"><span><b>${p.name}</b><span>${p.title}</span></span></button>`).join('');
   fields.forEach(k => { const el = $('f-' + k); if (document.activeElement !== el) el.value = P[k] || ''; });
   [...$('logoSeg').children].forEach(b => b.setAttribute('aria-pressed', b.dataset.logo === P.logo));
   $('reel').innerHTML = ANIMS.map(([f, name, desc], i) => `<label class="clip"><input type="radio" name="anim" value="${f}" ${f === state.anim ? 'checked' : ''}>
-    <div class="plate"><img src="${ASSETS}${f}-lockup${P.logo === 'gc' ? '' : '-plain'}.gif" width="176" alt="${name} preview" loading="lazy"></div>
+    <div class="plate"><img src="${PREVIEW}${f}-lockup${P.logo === 'gc' ? '' : '-plain'}.gif" width="176" alt="${name} preview" loading="lazy"></div>
     <div class="meta"><div class="row"><h3>${name}</h3><span class="n">${String(i + 1).padStart(2, '0')}</span></div><p>${desc}</p></div></label>`).join('');
   renderWall();
 }
 function renderWall() {
-  const P = person(), k = kit(P), A = ANIMS.find(x => x[0] === state.anim);
+  const P = person(), k = kit(P, PREVIEW), A = ANIMS.find(x => x[0] === state.anim);
   $('hero').src = k.u.banner; $('hero').height = k.u.bannerH; $('nowName').textContent = `${A[1]} · ${P.name}`;
   $('wall').innerHTML = LAYOUTS.map(([name, use, fn], i) => `<article class="lay">
     <div class="top"><em>${String(i + 1).padStart(2, '0')}</em><div><h3>${name}</h3><p class="use">${use}</p></div></div>
